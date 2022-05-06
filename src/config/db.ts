@@ -5,7 +5,7 @@ export const connectToDb = () => mongoose.connect(process.env.MONGO_URL)
 const redis = new Redis(process.env.REDIS_URL)
 
 async function clearCachedData(collectionName, op) {
-  const allowedCacheOps = ['find', 'findById', 'findOne']
+  const allowedCacheOps: string[] = ['find', 'findById', 'findOne']
   // if operation is insert or delete or update for any collection that exists and has cached values
   // delete its childern
   if (!allowedCacheOps.includes(op) && (await redis.exists(collectionName))) {
