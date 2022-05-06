@@ -71,4 +71,32 @@ describe('Order', () => {
       })
     })
   })
+
+  describe('update order status', () => {
+    it('should return a 204 and json', done => {
+      const newOrder = new Order({
+        items: ['Jollof Rice', 'Egusi', 'Fried Plantain'],
+        deliveryFee: 2500,
+        total: 5000,
+        user: testId,
+        status: 'pending'
+      })
+
+      newOrder.save().then(() => {
+        supertest(app)
+          .put(`/orders/${newOrder.testId}`)
+          .send({
+            items: ['Jollof Rice', 'Egusi', 'Fried Plantain'],
+            deliveryFee: 2500,
+            total: 5000,
+            user: testId,
+            status: 'delivered'
+          })
+          .set('Accept', 'application/json')
+          .expect(204)
+
+        done()
+      })
+    })
+  })
 })

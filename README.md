@@ -1,7 +1,19 @@
-# Awesome Project Build with TypeORM
+# Foodstop Order/Delivery API
 
-Steps to run this project:
+This api provides food order and delivery services. It is a RESTful API built with typescript, node, express, mongoose, and redis.
 
-1. Run `npm i` command
-2. Setup database settings inside `data-source.ts` file
-3. Run `npm start` command
+## Steps to run this project
+
+1. Run `git clone https://github.com/oseughu/foodstop.git` to clone this repository to your local machine.
+2. Run `npm i` command to install all the dependencies.
+3. Run `npm run dev` command to start the server
+
+## To Do
+
+- Implement the following features:
+  - [ ] Create a new order
+    - [ ] Get all orders
+    - [ ] Get an order by id
+    - [ ] Update an order
+    - [ ] Delete an order
+    - [ ] Get all orders by status
