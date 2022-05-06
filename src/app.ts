@@ -5,6 +5,9 @@ import { routes } from '#routes'
 
 const port = process.env.PORT || 3000
 
+connectToDb()
+applyMongooseCache()
+
 export const createServer = () => {
   const app = express()
 
@@ -18,7 +21,5 @@ export const createServer = () => {
 const app = createServer()
 
 app.listen(port, async () => {
-  await connectToDb()
-  applyMongooseCache()
   console.log('Server started successfully. ')
 })

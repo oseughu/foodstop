@@ -43,8 +43,11 @@ describe('Order', () => {
         const newUser = new User(userPayload)
 
         newUser.save().then(() => {
-          supertest(app).post('/orders').send(orderPayload).expect(201)
-
+          supertest(app)
+            .post('/orders')
+            .send(orderPayload)
+            .set('Accept', 'application/json')
+            .expect(201)
           done()
         })
       })
@@ -65,22 +68,6 @@ describe('Order', () => {
       newOrder.save().then(() => {
         supertest(app).get(`/orders/${newOrder.testId}`).expect(200)
         done()
-      })
-    })
-  })
-
-  describe('get orders from user', () => {
-    it('should return a 200 and json', done => {
-      const newUser = new User(userPayload)
-
-      newUser.save().then(() => {
-        const newOrder = new Order(orderPayload)
-
-        newOrder.save().then(() => {
-          supertest(app).get(`/orders/${newUser.testId}`).expect(200)
-          expect(newOrder.user).to.equal(newUser.testId)
-          done()
-        })
       })
     })
   })

@@ -40,14 +40,3 @@ export const getOrders = async (_: Request, res: Response) => {
     console.log(error)
   }
 }
-
-export const getOrdersFromUser = async (req: Request, res: Response) => {
-  const { userId } = req.params
-  try {
-    const allOrdersFromUser = await Order.find({ user: userId })
-    res.json(allOrdersFromUser)
-  } catch (error) {
-    res.status(500).json({ error: 'Something went wrong.' })
-    console.log(error)
-  }
-}
