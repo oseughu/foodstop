@@ -15,7 +15,7 @@
     "start": "node build/app.js",
     "dev": "nodemon --exec npx ts-node src/app.ts",
     "test": "mocha --timeout 10000 -r ts-node/register ./src/__tests__/**/*.test.ts",
-    "postinstall": "npm run build",
+    "postinstall": "tsc",
     "build": "rm -rf ./build && tsc"
   },
   "devDependencies": {
