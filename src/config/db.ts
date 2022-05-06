@@ -7,7 +7,7 @@ const redis = new Redis(process.env.REDIS_URL)
 async function clearCachedData(collectionName, op) {
   const allowedCacheOps: string[] = ['find', 'findById', 'findOne']
   // if operation is insert or delete or update for any collection that exists and has cached values
-  // delete its childern
+  // delete its children
   if (!allowedCacheOps.includes(op) && (await redis.exists(collectionName))) {
     redis.del(collectionName)
   }
