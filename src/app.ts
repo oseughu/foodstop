@@ -4,7 +4,7 @@ import compression from 'compression'
 import { connectToDb } from '#config/db'
 import { routes } from '#routes'
 
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 3000
 
 export const createServer = () => {
   const app: Application = express()
@@ -14,12 +14,16 @@ export const createServer = () => {
   app.use(json())
   app.use(routes)
 
+  app.get('/', (req, res) => {
+    console.log('hello')
+  })
+
   return app
 }
 
 const app = createServer()
+connectToDb()
 
 app.listen(port, () => {
-  connectToDb()
-  console.log('Server started successfully. Database connected.')
+  console.log('Server started successfully. ')
 })

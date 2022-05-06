@@ -13,6 +13,7 @@ export const createUser = async (req: Request, res: Response) => {
       address
     })
     await user.save()
+    console.log(user)
     res.status(201).json(user) //201 because a resource was created
   } catch (error) {
     console.log(error)
