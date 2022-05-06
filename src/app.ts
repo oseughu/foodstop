@@ -1,15 +1,13 @@
 import 'dotenv/config'
-import express, { json, urlencoded, Application } from 'express'
-import compression from 'compression'
+import express, { json, urlencoded } from 'express'
 import { connectToDb } from '#config/db'
 import { routes } from '#routes'
 
 const port = process.env.PORT || 3000
 
 export const createServer = () => {
-  const app: Application = express()
+  const app = express()
 
-  app.use(compression)
   app.use(urlencoded({ extended: true }))
   app.use(json())
   app.use(routes)
