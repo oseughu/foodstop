@@ -17,5 +17,6 @@
       "#routes": ["./src/routes/index.ts"],
       "#routes/*": ["./src/routes/*.ts"]
     }
-  }
+  },
+  "include": ["src/**/*"]
 }
