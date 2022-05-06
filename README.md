@@ -11,9 +11,6 @@ This api provides food order and delivery services. It is a RESTful API built wi
 ## To Do
 
 - Implement the following features:
-  - [ ] Create a new order
-    - [ ] Get all orders
-    - [ ] Get an order by id
-    - [ ] Update an order
-    - [ ] Delete an order
-    - [ ] Get all orders by status
+  - [ ] Improve caching
+  - [ ] Learn load and performance testing
+  - [ ] Implement a realtime notification system (a message queue (on it))
