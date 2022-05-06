@@ -18,9 +18,9 @@ const userPayload = {
 describe('User', () => {
   describe('get user', () => {
     beforeEach(done => {
-       mongoose.connection.collections.users.drop(() => {
-         done()
-       })
+      mongoose.connection.collections.users.drop(() => {
+        done()
+      })
     })
     describe('given user does not exist', () => {
       it('should return a 404', done => {
@@ -36,7 +36,6 @@ describe('User', () => {
         newUser.save().then(() => {
           supertest(app).get(`/users/${newUser.testId}`).expect(200)
           expect(newUser.testId).to.equal(testId)
-
           done()
         })
       })

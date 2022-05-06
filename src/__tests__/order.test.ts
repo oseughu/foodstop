@@ -3,6 +3,7 @@ import { User } from '#models/user.model'
 import { Order } from '#models/order.model'
 import mongoose from 'mongoose'
 import supertest from 'supertest'
+import { expect } from 'chai'
 
 const app = createServer()
 const testId = new mongoose.Types.ObjectId().toString()
@@ -77,6 +78,7 @@ describe('Order', () => {
 
         newOrder.save().then(() => {
           supertest(app).get(`/orders/${newUser.testId}`).expect(200)
+          expect(newOrder.user).to.equal(newUser.testId)
           done()
         })
       })
