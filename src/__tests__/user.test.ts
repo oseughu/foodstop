@@ -2,7 +2,7 @@ import { createServer } from '#src/app'
 import { User } from '#models/user.model'
 import mongoose from 'mongoose'
 import supertest from 'supertest'
-import { expect } from 'chai
+import { expect } from 'chai'
 
 const app = createServer()
 const testId = new mongoose.Types.ObjectId().toString()
