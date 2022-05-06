@@ -2,8 +2,7 @@ import { createServer } from '#src/app'
 import { User } from '#models/user.model'
 import mongoose from 'mongoose'
 import supertest from 'supertest'
-import { expect } from 'chai'
-import { beforeEachTest } from '#config/testDb'
+import { expect } from 'chai
 
 const app = createServer()
 const testId = new mongoose.Types.ObjectId().toString()
@@ -19,7 +18,9 @@ const userPayload = {
 describe('User', () => {
   describe('get user', () => {
     beforeEach(done => {
-      beforeEachTest(done)
+       mongoose.connection.collections.users.drop(() => {
+         done()
+       })
     })
     describe('given user does not exist', () => {
       it('should return a 404', done => {

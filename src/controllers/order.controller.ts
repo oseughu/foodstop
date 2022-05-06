@@ -1,6 +1,5 @@
 import { Request, Response } from 'express'
 import { Order } from '#models/order.model'
-import { User } from '#models/user.model'
 
 export const createOrder = async (req: Request, res: Response) => {
   const { userId, items, deliveryFee, totalAmount } = req.body
@@ -43,10 +42,10 @@ export const getOrders = async (_: Request, res: Response) => {
 }
 
 export const getOrdersFromUser = async (req: Request, res: Response) => {
-  const { id } = req.params
+  const { userId } = req.params
   try {
-    const allOrders = await Order.find({ user: id })
-    res.json(allOrders)
+    const allOrdersFromUser = await Order.find({ user: userId })
+    res.json(allOrdersFromUser)
   } catch (error) {
     res.status(500).json({ error: 'Something went wrong.' })
     console.log(error)

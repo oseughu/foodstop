@@ -1,6 +1,6 @@
 import 'dotenv/config'
 import express, { json, urlencoded } from 'express'
-import { connectToDb } from '#config/db'
+import { applyMongooseCache, connectToDb } from '#config/db'
 import { routes } from '#routes'
 
 const port = process.env.PORT || 3000
@@ -12,16 +12,13 @@ export const createServer = () => {
   app.use(json())
   app.use(routes)
 
-  app.get('/', (req, res) => {
-    console.log('hello')
-  })
-
   return app
 }
 
 const app = createServer()
-connectToDb()
 
-app.listen(port, () => {
+app.listen(port, async () => {
+  await connectToDb()
+  applyMongooseCache()
   console.log('Server started successfully. ')
 })

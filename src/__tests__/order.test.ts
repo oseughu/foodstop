@@ -3,7 +3,6 @@ import { User } from '#models/user.model'
 import { Order } from '#models/order.model'
 import mongoose from 'mongoose'
 import supertest from 'supertest'
-import { beforeEachTest } from '#config/testDb'
 
 const app = createServer()
 const testId = new mongoose.Types.ObjectId().toString()
@@ -26,7 +25,9 @@ const orderPayload = {
 
 describe('Order', () => {
   beforeEach(done => {
-    beforeEachTest(done)
+    mongoose.connection.collections.orders.drop(() => {
+      done()
+    })
   })
   describe('create order', () => {
     describe('given user does not exist', () => {
