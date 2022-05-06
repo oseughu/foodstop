@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "target": "es2020",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "outDir": "build",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "paths": {
+      "#src/*": ["./src/*.ts"],
+      "#config/*": ["./src/config/*.ts"],
+      "#controllers/*": ["./src/controllers/*.ts"],
+      "#models/*": ["./src/models/*.ts"],
+      "#routes": ["./src/routes/index.ts"],
+      "#routes/*": ["./src/routes/*.ts"]
+    }
+  }
+}
