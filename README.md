@@ -1,6 +1,6 @@
 # Foodstop Order/Delivery API
 
-This api provides food order and delivery services. It is a RESTful API built with typescript, node, express, mongoose, and redis.
+This api provides food order and delivery services. It is a RESTful API built with typescript, node, express, mongoose, and redis. Tests were written with mocha, chai and supertest.
 
 ## Steps to run this project
 
