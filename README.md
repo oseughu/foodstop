@@ -11,7 +11,7 @@ This api provides food order and delivery services. It is a RESTful API built wi
 
 ## To Do
 
-- Implement the following features:
-  - [ ] Improve caching
-  - [ ] Learn and apply load and performance testing
-  - [ ] Implement a realtime notification system (a message queue (currently on it))
+- [ ] Improve caching
+- [ ] Add vendor and inventory api (link both with user api maybe?)
+- [ ] Learn and apply load and performance testing
+- [ ] Implement a realtime notification system (a message queue (currently on it))
