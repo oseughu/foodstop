@@ -1,8 +1,8 @@
 import mongoose from 'mongoose'
 import Redis from 'ioredis'
 
-export const connectToDb = () => mongoose.connect(process.env.MONGO_URL)
-const redis = new Redis(process.env.REDIS_URL)
+export const connectToDb = () => mongoose.connect(process.env.MONGO_URI)
+const redis = new Redis(process.env.REDIS_URI)
 
 async function clearCachedData(collectionName, op) {
   const allowedCacheOps: string[] = ['find', 'findById', 'findOne']
