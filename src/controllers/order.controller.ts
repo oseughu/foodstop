@@ -10,7 +10,8 @@ export const createOrder = async (req: Request, res: Response) => {
       deliveryFee,
       totalAmount,
       user: userId
-    })
+      // @ts-ignore
+    }).cache()
 
     res.status(201).json(order) //201 because a resource was created
   } catch (error) {
@@ -33,7 +34,7 @@ export const getOrder = async (req: Request, res: Response) => {
 export const getOrders = async (_: Request, res: Response) => {
   try {
     // @ts-ignore
-    const allOrders = await Order.find()
+    const allOrders = await Order.find().cache()
     res.json(allOrders)
   } catch (error) {
     res.status(500).json({ error: 'Something went wrong.' })
@@ -45,7 +46,8 @@ export const updateOrderStatus = async (req: Request, res: Response) => {
   const { status } = req.body
 
   try {
-    const order = await Order.findOneAndUpdate({ _id: id }, { status })
+    // @ts-ignore
+    const order = await Order.findOneAndUpdate({ _id: id }, { status }).cache()
     res.json(order)
   } catch (error) {
     res.status(404).json({ error: 'Order not found.' })

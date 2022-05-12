@@ -11,7 +11,8 @@ export const createUser = async (req: Request, res: Response) => {
       password,
       phone,
       address
-    })
+      // @ts-ignore
+    }).cache()
 
     res.status(201).json(user) //201 because a resource was created
   } catch (error) {
@@ -23,7 +24,8 @@ export const createUser = async (req: Request, res: Response) => {
 
 export const getUsers = async (_: Request, res: Response) => {
   try {
-    const allUsers = await User.find()
+    // @ts-ignore
+    const allUsers = await User.find().cache()
     res.json(allUsers)
   } catch (error) {
     res.status(500).json({ error: 'Something went wrong.' })
@@ -47,10 +49,12 @@ export const editUser = async (req: Request, res: Response) => {
   const { fullName, email, password, phone, address } = req.body
 
   try {
+    // @ts-ignore
     const user = await User.updateOne(
       { _id: id },
       { fullName, email, password, phone, address }
-    )
+      // @ts-ignore
+    ).cache()
 
     res.status(204).json(user)
   } catch (error) {
