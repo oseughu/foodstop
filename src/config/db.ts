@@ -4,27 +4,26 @@ import Redis from 'ioredis'
 export const connectToDb = () => mongoose.connect(process.env.MONGO_URI)
 const redis = new Redis(process.env.REDIS_URI)
 
+async function clearCachedData(collectionName, op) {
+  const allowedCacheOps: string[] = ['find', 'findById', 'findOne']
+  // if operation is insert or delete or update for any collection that exists and has cached values
+  // delete its children
+  if (!allowedCacheOps.includes(op) && (await redis.exists(collectionName))) {
+    redis.del(collectionName)
+  }
+}
+
 export const applyMongooseCache = () => {
-  const exec = mongoose.Query.prototype.exec
-
-  async function clearCachedData(collectionName, op) {
-    const allowedCacheOps: string[] = ['find', 'findById', 'findOne']
-    // if operation is insert or delete or update for any collection that exists and has cached values
-    // delete its children
-    if (!allowedCacheOps.includes(op) && (await redis.exists(collectionName))) {
-      redis.del(collectionName)
-    }
-  }
-
-  // @ts-ignore
-  mongoose.Query.prototype.cache = function (time = 60 * 60) {
-    this.cacheMe = true
-    this.cacheTime = time
-    return this
-  }
-
   mongoose.Query.prototype.exec = async function () {
+    const exec = mongoose.Query.prototype.exec
     const collectionName = this.mongooseCollection.name
+
+    // @ts-ignore
+    mongoose.Query.prototype.cache = function (time = 60 * 60) {
+      this.cacheMe = true
+      this.cacheTime = time
+      return this
+    }
 
     if (this.cacheMe) {
       // You can't insert json straight to redis needs to be a string
