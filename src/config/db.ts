@@ -13,17 +13,17 @@ async function clearCachedData(collectionName, op) {
   }
 }
 
+// @ts-ignore
+mongoose.Query.prototype.cache = function (time = 60 * 60) {
+  this.cacheMe = true
+  this.cacheTime = time
+  return this
+}
+
 export const applyMongooseCache = () => {
   mongoose.Query.prototype.exec = async function () {
     const exec = mongoose.Query.prototype.exec
     const collectionName = this.mongooseCollection.name
-
-    // @ts-ignore
-    mongoose.Query.prototype.cache = function (time = 60 * 60) {
-      this.cacheMe = true
-      this.cacheTime = time
-      return this
-    }
 
     if (this.cacheMe) {
       // You can't insert json straight to redis needs to be a string
