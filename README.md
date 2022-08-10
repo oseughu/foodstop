@@ -5,7 +5,7 @@ This api provides food order and delivery services. It is a RESTful API built wi
 ## Steps to run this project
 
 1. Run `git clone https://github.com/oseughu/foodstop.git` to clone this repository to your local machine.
-2. Run `npm i` command to install all the dependencies.
+2. Run `npm i` command to install all dependencies.
 3. Run `npm test` command to run the tests.
 4. Add your own Redis and MongoDB connection URI to your `.env` file (REDIS_URI and MONGO_URI).
 5. Run `npm run dev` command to start the server
