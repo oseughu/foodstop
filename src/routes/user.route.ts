@@ -1,10 +1,10 @@
-import { Router } from 'express'
 import {
   createUser,
-  getUsers,
+  editUser,
   getUser,
-  editUser
+  getUsers
 } from '#controllers/user.controller'
+import { Router } from 'express'
 
 export const userRouter = Router()
 

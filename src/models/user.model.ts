@@ -1,4 +1,4 @@
-import mongoose, { Schema, model } from 'mongoose'
+import mongoose, { model, Schema } from 'mongoose'
 
 export interface IUser extends mongoose.Document {
   fullName: string

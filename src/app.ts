@@ -1,7 +1,7 @@
-import dotenv from 'dotenv'
-import express, { json, urlencoded } from 'express'
 import { applyMongooseCache, connectToDb } from '#config/db'
 import { routes } from '#routes'
+import dotenv from 'dotenv'
+import express, { json, urlencoded } from 'express'
 
 const port = process.env.PORT || 3000
 

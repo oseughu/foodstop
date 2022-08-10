@@ -1,5 +1,5 @@
 import { IUser } from '#models/user.model'
-import mongoose, { Schema, model } from 'mongoose'
+import mongoose, { model, Schema } from 'mongoose'
 
 export enum Status {
   pending = 'pending',

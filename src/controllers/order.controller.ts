@@ -1,5 +1,5 @@
-import { Request, Response } from 'express'
 import { Order } from '#models/order.model'
+import { Request, Response } from 'express'
 
 export const createOrder = async (req: Request, res: Response) => {
   const { userId, items, deliveryFee, totalAmount } = req.body

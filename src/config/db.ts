@@ -1,5 +1,5 @@
-import mongoose from 'mongoose'
 import Redis from 'ioredis'
+import mongoose from 'mongoose'
 
 export const connectToDb = () => mongoose.connect(process.env.MONGO_URI)
 const redis = new Redis(process.env.REDIS_URI)

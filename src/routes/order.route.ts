@@ -1,10 +1,10 @@
-import { Router } from 'express'
 import {
   createOrder,
-  getOrders,
   getOrder,
+  getOrders,
   updateOrderStatus
 } from '#controllers/order.controller'
+import { Router } from 'express'
 
 export const orderRouter = Router()
 

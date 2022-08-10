@@ -1,8 +1,8 @@
-import { createServer } from '#src/app'
 import { User } from '#models/user.model'
+import { createServer } from '#src/app'
+import { expect } from 'chai'
 import mongoose from 'mongoose'
 import supertest from 'supertest'
-import { expect } from 'chai'
 
 const app = createServer()
 const testId = new mongoose.Types.ObjectId().toString()
@@ -17,20 +17,20 @@ const userPayload = {
 
 describe('User', () => {
   describe('get user', () => {
-    beforeEach(done => {
+    beforeEach((done) => {
       mongoose.connection.collections.users.drop(() => {
         done()
       })
     })
     describe('given user does not exist', () => {
-      it('should return a 404', done => {
+      it('should return a 404', (done) => {
         supertest(app).get('/users/5e9whuwehwe').expect(404)
         done()
       })
     })
 
     describe('given user exists', () => {
-      it('should return a 200 and json', done => {
+      it('should return a 200 and json', (done) => {
         const newUser = new User(userPayload)
 
         newUser.save().then(() => {
@@ -43,7 +43,7 @@ describe('User', () => {
   })
 
   describe('get users', () => {
-    it('should return a 200 and json', done => {
+    it('should return a 200 and json', (done) => {
       supertest(app).get('/users').expect(200)
       done()
     })
@@ -51,7 +51,7 @@ describe('User', () => {
 
   describe('create user', () => {
     describe('given user already exists', () => {
-      it('should return a 403', done => {
+      it('should return a 403', (done) => {
         supertest(app)
           .post('/users')
           .send(userPayload)
@@ -63,7 +63,7 @@ describe('User', () => {
     })
 
     describe('given user does not exist', () => {
-      it('should return a 201 and json', done => {
+      it('should return a 201 and json', (done) => {
         supertest(app)
           .post('/users')
           .send({
@@ -83,7 +83,7 @@ describe('User', () => {
   })
 
   describe('Edit user details', () => {
-    it('should return a 204 and json', done => {
+    it('should return a 204 and json', (done) => {
       const newUser = new User({
         fullName: 'An Unedited User',
         email: 'notedited@user.com',
