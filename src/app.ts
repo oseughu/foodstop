@@ -1,15 +1,15 @@
 import { applyMongooseCache, connectDb } from '#config/db'
 import routes from '#routes'
 import 'dotenv/config'
-import express, { json, urlencoded } from 'express'
+import express, { Application, json, Request, Response, urlencoded } from 'express'
 
 const port = process.env.PORT || 8000
 
 connectDb()
 applyMongooseCache()
 
-export const createServer = () => {
-  const app = express()
+const createServer = () => {
+  const app: Application = express()
 
   app.use(urlencoded({ extended: true }))
   app.use(json())
@@ -20,9 +20,15 @@ export const createServer = () => {
 
 const app = createServer()
 
+app.get('/', (req: Request, res: Response) => {
+  res.send({ message: 'Welcome to the Foodstop API!' })
+})
+
 app.listen(port, async () => {
   console.log(`Server running on port ${port}`)
 })
+
+export default createServer
 
 // tickets sold
 // createDate begin and end slicing wrongly

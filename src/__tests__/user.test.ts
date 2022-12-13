@@ -1,5 +1,5 @@
 import { User } from '#models/user.model'
-import { createServer } from '#src/app'
+import createServer from '#src/app'
 import { expect } from 'chai'
 import mongoose from 'mongoose'
 import supertest from 'supertest'
