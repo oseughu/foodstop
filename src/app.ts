@@ -1,12 +1,11 @@
-import { applyMongooseCache, connectToDb } from '#config/db'
-import { routes } from '#routes'
-import dotenv from 'dotenv'
+import { applyMongooseCache, connectDb } from '#config/db'
+import routes from '#routes'
+import 'dotenv/config'
 import express, { json, urlencoded } from 'express'
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 8000
 
-dotenv.config()
-connectToDb()
+connectDb()
 applyMongooseCache()
 
 export const createServer = () => {
@@ -22,5 +21,9 @@ export const createServer = () => {
 const app = createServer()
 
 app.listen(port, async () => {
-  console.log('Server started successfully. ')
+  console.log(`Server running on port ${port}`)
 })
+
+// tickets sold
+// createDate begin and end slicing wrongly
+// profit and loss

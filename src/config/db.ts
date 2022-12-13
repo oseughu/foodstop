@@ -1,7 +1,9 @@
 import Redis from 'ioredis'
 import mongoose from 'mongoose'
 
-export const connectToDb = () => mongoose.connect(process.env.MONGO_URI)
+mongoose.set('strictQuery', true)
+
+const connectDb = () => mongoose.connect(process.env.MONGO_URI)
 const redis = new Redis(process.env.REDIS_URI)
 
 async function clearCachedData(collectionName, op) {
@@ -20,14 +22,13 @@ mongoose.Query.prototype.cache = function (time = 60 * 60) {
   return this
 }
 
-export const applyMongooseCache = () => {
+function applyMongooseCache() {
   mongoose.Query.prototype.exec = async function () {
     const exec = mongoose.Query.prototype.exec
     const collectionName = this.mongooseCollection.name
 
     if (this.cacheMe) {
       // You can't insert json straight to redis needs to be a string
-
       const key = JSON.stringify({
         ...this.getOptions(),
         collectionName: collectionName,
@@ -36,7 +37,6 @@ export const applyMongooseCache = () => {
       const cachedResults = await redis.hget(collectionName, key)
 
       // getOptions() returns the query and this.op is the method which in our case is "find"
-
       if (cachedResults) {
         // if you found cached results return it;
         const result = JSON.parse(cachedResults)
@@ -46,13 +46,7 @@ export const applyMongooseCache = () => {
       // get results from Database then cache it
       const result = await exec.apply(this, arguments)
 
-      redis.hset(
-        collectionName,
-        key,
-        JSON.stringify(result),
-        'EX',
-        this.cacheTime
-      )
+      redis.hset(collectionName, key, JSON.stringify(result), 'EX', this.cacheTime)
 
       return result
     }
@@ -61,3 +55,5 @@ export const applyMongooseCache = () => {
     return exec.apply(this, arguments)
   }
 }
+
+export { connectDb, applyMongooseCache }

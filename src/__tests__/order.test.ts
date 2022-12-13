@@ -1,4 +1,4 @@
-import { Order } from '#models/order.model'
+import Order from '#models/order.model'
 import { User } from '#models/user.model'
 import { createServer } from '#src/app'
 import mongoose from 'mongoose'

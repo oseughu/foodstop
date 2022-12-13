@@ -1,7 +1,7 @@
-import { Order } from '#models/order.model'
+import Order from '#models/order.model'
 import { Request, Response } from 'express'
 
-export const createOrder = async (req: Request, res: Response) => {
+const createOrder = async (req: Request, res: Response) => {
   const { userId, items, deliveryFee, totalAmount } = req.body
 
   try {
@@ -19,7 +19,7 @@ export const createOrder = async (req: Request, res: Response) => {
   }
 }
 
-export const getOrder = async (req: Request, res: Response) => {
+const getOrder = async (req: Request, res: Response) => {
   const { id } = req.params
 
   try {
@@ -31,7 +31,7 @@ export const getOrder = async (req: Request, res: Response) => {
   }
 }
 
-export const getOrders = async (_: Request, res: Response) => {
+const getOrders = async (_: Request, res: Response) => {
   try {
     // @ts-ignore
     const allOrders = await Order.find().cache()
@@ -41,7 +41,7 @@ export const getOrders = async (_: Request, res: Response) => {
   }
 }
 
-export const updateOrderStatus = async (req: Request, res: Response) => {
+const updateOrderStatus = async (req: Request, res: Response) => {
   const { id } = req.params
   const { status } = req.body
 
@@ -53,3 +53,5 @@ export const updateOrderStatus = async (req: Request, res: Response) => {
     res.status(404).json({ error: 'Order not found.' })
   }
 }
+
+export { createOrder, getOrder, getOrders, updateOrderStatus }

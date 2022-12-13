@@ -2,8 +2,8 @@
   "compilerOptions": {
     "skipLibCheck": true,
     "target": "es2020",
-    "module": "commonjs",
-    "moduleResolution": "node",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "outDir": "build",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,

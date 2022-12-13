@@ -1,7 +1,7 @@
 import { User } from '#models/user.model'
 import { Request, Response } from 'express'
 
-export const createUser = async (req: Request, res: Response) => {
+const createUser = async (req: Request, res: Response) => {
   const { fullName, email, password, phone, address } = req.body
 
   try {
@@ -22,7 +22,7 @@ export const createUser = async (req: Request, res: Response) => {
   }
 }
 
-export const getUsers = async (_: Request, res: Response) => {
+const getUsers = async (_: Request, res: Response) => {
   try {
     // @ts-ignore
     const allUsers = await User.find().cache()
@@ -32,7 +32,7 @@ export const getUsers = async (_: Request, res: Response) => {
   }
 }
 
-export const getUser = async (req: Request, res: Response) => {
+const getUser = async (req: Request, res: Response) => {
   const { id } = req.params
 
   try {
@@ -44,7 +44,7 @@ export const getUser = async (req: Request, res: Response) => {
   }
 }
 
-export const editUser = async (req: Request, res: Response) => {
+const editUser = async (req: Request, res: Response) => {
   const { id } = req.params
   const { fullName, email, password, phone, address } = req.body
 
@@ -61,3 +61,5 @@ export const editUser = async (req: Request, res: Response) => {
     res.status(500).json({ error: 'Something went wrong.' })
   }
 }
+
+export { createUser, getUsers, getUser, editUser }
