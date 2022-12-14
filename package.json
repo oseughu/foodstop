@@ -12,7 +12,7 @@
     "#routes/*": "./build/routes/*.js"
   },
   "scripts": {
-    "prebuild": "rm -r build",
+    "prebuild": "rm -rf ./build",
     "build": "tsc",
     "prestart": "npm run build",
     "start": "node build/app.js",
