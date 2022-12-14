@@ -29,7 +29,3 @@ app.listen(port, async () => {
 })
 
 export default createServer
-
-// tickets sold
-// createDate begin and end slicing wrongly
-// profit and loss
