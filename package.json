@@ -14,10 +14,10 @@
   "scripts": {
     "prebuild": "rm -rf ./build",
     "build": "tsc",
-    "prestart": "npm run build",
     "start": "node build/app.js",
     "dev": "tsc-watch --onSuccess \"ts-node src/app.ts\"",
-    "test": "mocha --timeout 100000 -r ts-node/register ./src/__tests__/**/*.test.ts"
+    "test": "mocha --timeout 100000 -r ts-node/register ./src/__tests__/**/*.test.ts",
+    "postinstall": "npm run build"
   },
   "devDependencies": {
     "@types/chai": "^4.3.4",
